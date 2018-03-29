@@ -4,14 +4,7 @@ import Book from "./book"
 
 class BookShelf extends React.Component {
     state = {
-        book: [],
-        selectValue: "none"
-    }
-
-    UpdateSelectState = (event, book) => {
-        let eValue = event.currentTarget.value;
-        this.setState({selectValue: eValue})
-        this.props.onBookUpdate(book, eValue);
+        book: []
     }
 
     render() {
@@ -21,7 +14,9 @@ class BookShelf extends React.Component {
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         {this.props.books.map(returnedBook =>
-                            <Book key={returnedBook.id} onSelect={this.UpdateSelectState} book={returnedBook}/>
+                            <Book key={returnedBook.id}
+                            onBookUpdate={(book, shelf) => this.props.onBookUpdate(book, shelf)}
+                            book={returnedBook}/>
                         )}
                         
                     </ol>
