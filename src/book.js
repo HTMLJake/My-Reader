@@ -1,5 +1,4 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 
 class Book extends React.Component {
     render() {
@@ -8,10 +7,10 @@ class Book extends React.Component {
                 <div className="book">
                     <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:
-                            `url(${this.props.book.imageLinks.thumbnail})` }}></div>
+                            this.props.book.imageLinks ? `url(${this.props.book.imageLinks.thumbnail })` : undefined }}></div>
                         <div className="book-shelf-changer">
                             <select value={this.props.book.shelf ? this.props.book.shelf : "none"} onChange={event => this.props.onBookUpdate(this.props.book, event.currentTarget.value)}>
-                                <option value="none" disabled>Move to...</option>
+                                <option value="moveTo" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
@@ -20,7 +19,7 @@ class Book extends React.Component {
                         </div>
                     </div>
                     <div className="book-title">{this.props.book.title}</div>
-                    <div className="book-authors">{this.props.book.authors.map(a => <p key={a}>{a}</p>)}</div>
+                    <div className="book-authors">{this.props.book.authors ? this.props.book.authors.map(a => <p key={a}>{a}</p>) : ""}</div>
                 </div>
             </li>
         )
